@@ -7,6 +7,7 @@ import java.util.ArrayList;
 public class Carro {
     private String marca;
     private String modelo;
+    private String tipo;
     private Color color;
     private double precio;
     private ArrayList<String> mejoras = new ArrayList();
@@ -17,9 +18,10 @@ public class Carro {
     public Carro() {
     }
 
-    public Carro(String marca, String modelo, Color color, double precio, String pais, String añoF) {
+    public Carro(String marca, String modelo, String tipo, Color color, double precio, String pais, String añoF) {
         this.marca = marca;
         this.modelo = modelo;
+        this.tipo = tipo;
         this.color = color;
         this.precio = precio;
         this.pais = pais;
@@ -40,6 +42,14 @@ public class Carro {
 
     public void setModelo(String modelo) {
         this.modelo = modelo;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     public Color getColor() {
@@ -92,7 +102,7 @@ public class Carro {
 
     @Override
     public String toString() {
-        return "Marca: " + marca + "\nModelo: " + modelo + "\nColor: " + color + "\nPrecio: " + precio + "\nMejoras: " + mejoras + "\nPais: " + pais + "\nAño de fabricacion: " + añoF + "\nPartes instaladas: " + partes;
+        return "Marca: " + marca + "\nModelo: " + modelo + "\nTipo: " + tipo + "\nColor: " + color + "\nPrecio: " + precio + "\nMejoras: " + mejoras + "\nPais: " + pais + "\nAño de fabricacion: " + añoF + "\nPartes instaladas: " + partes;
     }
     
     

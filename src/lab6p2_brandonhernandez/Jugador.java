@@ -1,13 +1,11 @@
-
 package lab6p2_brandonhernandez;
 
-import java.util.Date;
-
 public class Jugador {
+
     private String name;
     private String correo;
     private String pais;
-    private Date fechaN;
+    private int fechaN;
     private String user;
     private String pass;
     private double saldo;
@@ -15,7 +13,7 @@ public class Jugador {
     public Jugador() {
     }
 
-    public Jugador(String name, String correo, String pais, Date fechaN, String user, String pass) {
+    public Jugador(String name, String correo, String pais, int fechaN, String user, String pass) {
         this.name = name;
         this.correo = correo;
         this.pais = pais;
@@ -49,11 +47,11 @@ public class Jugador {
         this.pais = pais;
     }
 
-    public Date getFechaN() {
+    public int getFechaN() {
         return fechaN;
     }
 
-    public void setFechaN(Date fechaN) {
+    public void setFechaN(int fechaN) {
         this.fechaN = fechaN;
     }
 
@@ -85,6 +83,5 @@ public class Jugador {
     public String toString() {
         return "Nombre: " + name + "\nCorreo: " + correo + "\nPais: " + pais + "\nFecha Nacimiento: " + fechaN + "\nUsuario: " + user + "\nSaldo: " + saldo;
     }
-    
-    
+
 }

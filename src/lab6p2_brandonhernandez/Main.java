@@ -6,8 +6,10 @@ package lab6p2_brandonhernandez;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JColorChooser;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -20,6 +22,7 @@ public class Main extends javax.swing.JFrame {
      */
     ArrayList<Carro> carros = new ArrayList();
     ArrayList<Jugador> jugadores = new ArrayList();
+    Color color;
 
     public Main() {
         initComponents();
@@ -72,6 +75,7 @@ public class Main extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
         precio = new javax.swing.JTextField();
         jPanel10 = new javax.swing.JPanel();
+        bttnSalirAdmin = new javax.swing.JButton();
         vUsuario = new javax.swing.JDialog();
         jPanel3 = new javax.swing.JPanel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
@@ -82,11 +86,11 @@ public class Main extends javax.swing.JFrame {
         jList1 = new javax.swing.JList<>();
         jPanel6 = new javax.swing.JPanel();
         jtComprar = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        comprar = new javax.swing.JTable();
         bttnComprar = new javax.swing.JButton();
         jPanel11 = new javax.swing.JPanel();
         jtVender = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        vender = new javax.swing.JTable();
         bttnVender = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
@@ -237,7 +241,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        cbPais.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Japón", "Italia", "Usa", "Alemania" }));
+        cbPais.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Japon", "Italia", "Usa", "Alemania" }));
 
         jLabel11.setText("Pais:");
 
@@ -251,6 +255,11 @@ public class Main extends javax.swing.JFrame {
         jLabel14.setText("Tipo:");
 
         bttnColor.setText("Color");
+        bttnColor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bttnColorMouseClicked(evt);
+            }
+        });
 
         jLabel15.setText("Color:");
 
@@ -343,15 +352,28 @@ public class Main extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Agregar Carro", jPanel4);
 
+        bttnSalirAdmin.setText("SALIR");
+        bttnSalirAdmin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bttnSalirAdminMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 701, Short.MAX_VALUE)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGap(130, 130, 130)
+                .addComponent(bttnSalirAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 432, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(139, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 524, Short.MAX_VALUE)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGap(114, 114, 114)
+                .addComponent(bttnSalirAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(184, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Salir ", jPanel10);
@@ -416,7 +438,7 @@ public class Main extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("Garaje", jPanel5);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        comprar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -427,7 +449,7 @@ public class Main extends javax.swing.JFrame {
                 "Marca", "Modelo", "Color", "Año", "Reconstruido"
             }
         ));
-        jtComprar.setViewportView(jTable2);
+        jtComprar.setViewportView(comprar);
 
         bttnComprar.setText("Comprar");
 
@@ -456,7 +478,7 @@ public class Main extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("Compra de Carros", jPanel6);
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        vender.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -467,7 +489,7 @@ public class Main extends javax.swing.JFrame {
                 "Marca", "Modelo", "Color", "Año", "Reconstruido"
             }
         ));
-        jtVender.setViewportView(jTable3);
+        jtVender.setViewportView(vender);
 
         bttnVender.setText("Vender");
 
@@ -688,12 +710,12 @@ public class Main extends javax.swing.JFrame {
             if (j.getUser().equals(nUser.getText())) {
                 JOptionPane.showMessageDialog(this, "Este usuario ya existe");
             } else {
-                if(fNacimiento.getDate().getYear() < (2012+1900)){
+                if (fNacimiento.getDate().getYear() < (2012 + 1900)) {
                     JOptionPane.showMessageDialog(this, "Menores de Edad no pueden jugar XD");
-                } else{
-                Jugador jd = new Jugador(nombre.getText(), correo.getText(), pais.getText(), fNacimiento.getDate().getYear(), nUser.getText(), nPass.getText());
-                jugadores.add(jd);
-                JOptionPane.showMessageDialog(vAdmin, "Usuario Agregado");
+                } else {
+                    Jugador jd = new Jugador(nombre.getText(), correo.getText(), pais.getText(), fNacimiento.getDate().getYear(), nUser.getText(), nPass.getText());
+                    jugadores.add(jd);
+                    JOptionPane.showMessageDialog(vAdmin, "Usuario Agregado");
                 }
             }
         }
@@ -703,13 +725,58 @@ public class Main extends javax.swing.JFrame {
         vAdmin.pack();
         vAdmin.setVisible(true);
         vAdmin.setLocationRelativeTo(null);
+
+        DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+        if (cbPais.getSelectedItem().toString().equals("Japon")) {
+            cbMarca.addItem("Subaru");
+            cbMarca.addItem("Toyota");
+            cbMarca.addItem("Nissan");
+            cbMarca.addItem("Honda");
+            cbMarca.setModel(modelo);
+        } else if (cbPais.getSelectedItem().toString().equals("Italia")) {
+            cbMarca.addItem("Ferrari");
+            cbMarca.addItem("Lamborghini");
+            cbMarca.setModel(modelo);
+        } else if (cbPais.getSelectedItem().toString().equals("USA")) {
+            cbMarca.setModel(modelo);
+            cbMarca.addItem("FORD");
+            cbMarca.addItem("Chevrolet");
+            cbMarca.addItem("ACORH");
+
+        } else if (cbPais.getSelectedItem().toString().equals("Alemania")) {
+            cbMarca.setModel(modelo);
+            cbMarca.addItem("BMW");
+            cbMarca.addItem("Mercedes-Benz");
+            cbMarca.addItem("VW");
+            cbMarca.addItem("Audi");
+            cbMarca.addItem("Porsche");
+
+        }
     }//GEN-LAST:event_bttnAdminMouseClicked
 
     private void bttnAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bttnAgregarMouseClicked
-        Carro c = new Carro(((String) cbMarca.getSelectedItem()), (String) cbModelo.getSelectedItem(), ((String) cbTipo.getSelectedItem()), JColorChooser.showDialog(vAdmin, "Escoja el color", Color.yellow), Double.parseDouble(precio.getText()), (String) cbPais.getSelectedItem(), año.getText());
+        Carro c = new Carro(((String) cbMarca.getSelectedItem()), (String) cbModelo.getSelectedItem(), ((String) cbTipo.getSelectedItem()), color, Double.parseDouble(precio.getText()), (String) cbPais.getSelectedItem(), año.getText());
         carros.add(c);
+        DefaultTableModel modelo = (DefaultTableModel) comprar.getModel();
+        Object[] datos = new Object[5];
+        datos[0] = cbMarca.getSelectedItem();
+        datos[1] = cbModelo.getSelectedItem();
+        datos[2] = color;
+        datos[3] = año;
+        datos[4] = cbTipo.getSelectedItem();
+        modelo.addRow(datos);
+        comprar.setModel(modelo);
         JOptionPane.showMessageDialog(vAdmin, "Carro Agregado");
     }//GEN-LAST:event_bttnAgregarMouseClicked
+
+    private void bttnColorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bttnColorMouseClicked
+        color = JColorChooser.showDialog(vAdmin, "Escoja el color", Color.yellow);
+    }//GEN-LAST:event_bttnColorMouseClicked
+
+    private void bttnSalirAdminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bttnSalirAdminMouseClicked
+        vAdmin.setVisible(false);
+        this.setVisible(true);
+    }//GEN-LAST:event_bttnSalirAdminMouseClicked
 
     /**
      * @param args the command line arguments
@@ -756,11 +823,13 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton bttnCrearUser;
     private javax.swing.JButton bttnIniciar;
     private javax.swing.JButton bttnModificar;
+    private javax.swing.JButton bttnSalirAdmin;
     private javax.swing.JButton bttnVender;
     private javax.swing.JComboBox<String> cbMarca;
     private javax.swing.JComboBox<String> cbModelo;
     private javax.swing.JComboBox<String> cbPais;
     private javax.swing.JComboBox<String> cbTipo;
+    private javax.swing.JTable comprar;
     private javax.swing.JTextField correo;
     private com.toedter.calendar.JDateChooser fNacimiento;
     private javax.swing.JLabel jLabel1;
@@ -802,8 +871,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
@@ -822,5 +889,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JDialog vAdmin;
     private javax.swing.JDialog vCrearUser;
     private javax.swing.JDialog vUsuario;
+    private javax.swing.JTable vender;
     // End of variables declaration//GEN-END:variables
 }
